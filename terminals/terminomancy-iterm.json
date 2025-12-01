@@ -1,0 +1,119 @@
+{
+  "Name": "Terminomancy",
+  "Guid": "terminomancy",
+  "Ansi 0 Color": {
+    "Red Component": 0.133,
+    "Green Component": 0.133,
+    "Blue Component": 0.133
+  },
+  "Ansi 1 Color": {
+    "Red Component": 0.667,
+    "Green Component": 0.267,
+    "Blue Component": 0.314
+  },
+  "Ansi 2 Color": {
+    "Red Component": 0.467,
+    "Green Component": 0.608,
+    "Blue Component": 0.439
+  },
+  "Ansi 3 Color": {
+    "Red Component": 0.902,
+    "Green Component": 0.584,
+    "Blue Component": 0.165
+  },
+  "Ansi 4 Color": {
+    "Red Component": 0.533,
+    "Green Component": 0.533,
+    "Blue Component": 0.800
+  },
+  "Ansi 5 Color": {
+    "Red Component": 0.561,
+    "Green Component": 0.435,
+    "Blue Component": 0.561
+  },
+  "Ansi 6 Color": {
+    "Red Component": 0.322,
+    "Green Component": 0.545,
+    "Blue Component": 0.545
+  },
+  "Ansi 7 Color": {
+    "Red Component": 0.761,
+    "Green Component": 0.761,
+    "Blue Component": 0.690
+  },
+  "Ansi 8 Color": {
+    "Red Component": 0.541,
+    "Green Component": 0.541,
+    "Blue Component": 0.471
+  },
+  "Ansi 9 Color": {
+    "Red Component": 1.000,
+    "Green Component": 0.416,
+    "Blue Component": 0.416
+  },
+  "Ansi 10 Color": {
+    "Red Component": 0.235,
+    "Green Component": 0.702,
+    "Blue Component": 0.443
+  },
+  "Ansi 11 Color": {
+    "Red Component": 0.800,
+    "Green Component": 0.533,
+    "Blue Component": 0.000
+  },
+  "Ansi 12 Color": {
+    "Red Component": 0.310,
+    "Green Component": 0.580,
+    "Blue Component": 0.804
+  },
+  "Ansi 13 Color": {
+    "Red Component": 0.439,
+    "Green Component": 0.722,
+    "Blue Component": 0.722
+  },
+  "Ansi 14 Color": {
+    "Red Component": 0.443,
+    "Green Component": 0.588,
+    "Blue Component": 0.067
+  },
+  "Ansi 15 Color": {
+    "Red Component": 0.980,
+    "Green Component": 0.957,
+    "Blue Component": 0.776
+  },
+  "Background Color": {
+    "Red Component": 0.133,
+    "Green Component": 0.133,
+    "Blue Component": 0.133
+  },
+  "Bold Color": {
+    "Red Component": 0.980,
+    "Green Component": 0.957,
+    "Blue Component": 0.776
+  },
+  "Cursor Color": {
+    "Red Component": 0.902,
+    "Green Component": 0.584,
+    "Blue Component": 0.165
+  },
+  "Cursor Text Color": {
+    "Red Component": 0.133,
+    "Green Component": 0.133,
+    "Blue Component": 0.133
+  },
+  "Foreground Color": {
+    "Red Component": 0.761,
+    "Green Component": 0.761,
+    "Blue Component": 0.690
+  },
+  "Selected Text Color": {
+    "Red Component": 0.761,
+    "Green Component": 0.761,
+    "Blue Component": 0.690
+  },
+  "Selection Color": {
+    "Red Component": 0.227,
+    "Green Component": 0.227,
+    "Blue Component": 0.227
+  }
+}
