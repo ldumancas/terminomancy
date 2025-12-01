@@ -102,11 +102,13 @@ hi("DiagnosticUnderlineHint", { undercurl = true, sp = c.hint
 })
 
 -- Diff
-hi("DiffAdd", { bg = c.diff_add })
-hi("DiffDelete", { bg = c.diff_del })
-hi("DiffChange", { bg = c.diff_change })
+hi("DiffAdd", { fg = c.diff_add, bg = c.diff_add_bg })
+hi("DiffDelete", { fg = c.diff_del, bg = c.diff_del_bg })
+hi("DiffChange", { fg = c.fg, bg = c.diff_change_bg })
+hi("DiffText", { fg = c.fg, bg = c.diff_text_bg, bold = true })
 hi("diffAdded", { fg = c.diff_add })
 hi("diffRemoved", { fg = c.diff_del })
+hi("diffChanged", { fg = c.diff_change })
 
 -- Git Signs
 hi("GitSignsAdd", { fg = c.diff_add })
