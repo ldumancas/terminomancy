@@ -49,6 +49,7 @@ M.diff_text_bg = "#3a4a5a"
 
 -- Accent
 M.accent = "#e6952a"
+M.accent_dark = "#c4820a"
 M.todo = "#8f6f8f"
 
 return M
