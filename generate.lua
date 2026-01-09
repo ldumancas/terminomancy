@@ -982,6 +982,31 @@ bright7=%s
     )
 end
 
+-- Generate Sway window colors
+local function generate_sway_colors()
+    return string.format([[# Terminomancy - Sway window colors
+# Generated from palette.lua
+#
+# Include in your sway config:
+#   include ~/.config/terminomancy/sway/colors
+
+# class                 border    background  text      indicator   child_border
+client.focused          %s   %s     %s   %s     %s
+client.focused_inactive %s   %s     %s   %s     %s
+client.unfocused        %s   %s     %s   %s     %s
+client.urgent           %s   %s     %s   %s     %s
+]],
+        -- focused: accent border, dark bg, normal text
+        palette.accent, palette.bg, palette.fg, palette.accent, palette.accent,
+        -- focused_inactive: subtle border, darker bg, dim text
+        palette.bg_light, palette.bg_dark, palette.fg_dim, palette.bg_light, palette.bg_light,
+        -- unfocused: subtle border, darker bg, comment-colored text
+        palette.bg_light, palette.bg_dark, palette.comment, palette.bg_light, palette.bg_light,
+        -- urgent: error color everywhere
+        palette.error, palette.error, palette.bg, palette.error, palette.error
+    )
+end
+
 -- Main execution
 print("Generating Terminomancy configs from palette.lua...")
 
@@ -1056,6 +1081,16 @@ if f then
     f:write(foot_config)
     f:close()
     print("✓ Generated foot/foot.ini")
+end
+
+-- Write Sway colors
+os.execute("mkdir -p sway")
+local sway_colors = generate_sway_colors()
+f = io.open("sway/colors", "w")
+if f then
+    f:write(sway_colors)
+    f:close()
+    print("✓ Generated sway/colors")
 end
 
 print("\n✨ All configs generated successfully!")
