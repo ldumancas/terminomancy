@@ -917,10 +917,9 @@ local function generate_foot_config()
 # Font configuration (uncomment and adjust as needed)
 # font=monospace:size=12
 
-[cursor]
-color=%s %s
-
 [colors]
+# Cursor (foreground background)
+cursor=%s %s
 # Base colors
 foreground=%s
 background=%s
