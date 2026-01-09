@@ -900,6 +900,89 @@ export EZA_COLORS
     )
 end
 
+-- Helper to strip # from hex colors (for foot format)
+local function hex_strip(hex)
+    return hex:gsub("#", "")
+end
+
+-- Generate Foot terminal config
+local function generate_foot_config()
+    return string.format([[# Terminomancy - Foot terminal theme
+# Generated from palette.lua
+#
+# Copy to ~/.config/foot/foot.ini or include via:
+#   include=~/.config/terminomancy/foot/foot.ini
+
+[main]
+# Font configuration (uncomment and adjust as needed)
+# font=monospace:size=12
+
+[cursor]
+color=%s %s
+
+[colors]
+# Base colors
+foreground=%s
+background=%s
+
+# Selection
+selection-foreground=%s
+selection-background=%s
+
+# URL color
+urls=%s
+
+# Regular colors (0-7)
+regular0=%s
+regular1=%s
+regular2=%s
+regular3=%s
+regular4=%s
+regular5=%s
+regular6=%s
+regular7=%s
+
+# Bright colors (8-15)
+bright0=%s
+bright1=%s
+bright2=%s
+bright3=%s
+bright4=%s
+bright5=%s
+bright6=%s
+bright7=%s
+]],
+        -- Cursor: bg on accent
+        hex_strip(palette.bg), hex_strip(palette.accent),
+        -- Foreground/Background
+        hex_strip(palette.fg),
+        hex_strip(palette.bg),
+        -- Selection
+        hex_strip(palette.fg),
+        hex_strip(palette.selection),
+        -- URLs
+        hex_strip(palette.info),
+        -- Regular 0-7
+        hex_strip(palette.bg),         -- black
+        hex_strip(palette.diff_del),   -- red
+        hex_strip(palette.string),     -- green
+        hex_strip(palette.accent),     -- yellow
+        hex_strip(palette.keyword),    -- blue
+        hex_strip(palette.todo),       -- magenta
+        hex_strip(palette.preproc),    -- cyan
+        hex_strip(palette.fg),         -- white
+        -- Bright 8-15
+        hex_strip(palette.comment),    -- bright black
+        hex_strip(palette.error),      -- bright red
+        hex_strip(palette.diff_add),   -- bright green
+        hex_strip(palette.number),     -- bright yellow
+        hex_strip(palette.info),       -- bright blue
+        hex_strip(palette.identifier), -- bright magenta
+        hex_strip(palette.special),    -- bright cyan
+        hex_strip(palette.func)        -- bright white
+    )
+end
+
 -- Main execution
 print("Generating Terminomancy configs from palette.lua...")
 
@@ -964,6 +1047,16 @@ if f then
     f:write(ls_colors)
     f:close()
     print("✓ Generated shell/ls-colors-terminomancy.sh")
+end
+
+-- Write Foot terminal config
+os.execute("mkdir -p foot")
+local foot_config = generate_foot_config()
+f = io.open("foot/foot.ini", "w")
+if f then
+    f:write(foot_config)
+    f:close()
+    print("✓ Generated foot/foot.ini")
 end
 
 print("\n✨ All configs generated successfully!")
