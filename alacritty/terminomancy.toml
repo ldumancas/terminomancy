@@ -1,0 +1,38 @@
+# Terminomancy - Alacritty terminal theme
+# Generated from palette.lua
+#
+# Import in your alacritty.toml:
+#   [general]
+#   import = ["~/.config/terminomancy/alacritty/terminomancy.toml"]
+
+[colors.primary]
+foreground = "#c2c2b0"
+background = "#222222"
+
+[colors.cursor]
+text = "#222222"
+cursor = "#e6952a"
+
+[colors.selection]
+text = "#c2c2b0"
+background = "#3a3a3a"
+
+[colors.normal]
+black   = "#222222"
+red     = "#aa4450"
+green   = "#779b70"
+yellow  = "#e6952a"
+blue    = "#8888cc"
+magenta = "#8f6f8f"
+cyan    = "#528b8b"
+white   = "#c2c2b0"
+
+[colors.bright]
+black   = "#8a8a78"
+red     = "#ff6a6a"
+green   = "#3cb371"
+yellow  = "#cc8800"
+blue    = "#4f94cd"
+magenta = "#70b8b8"
+cyan    = "#719611"
+white   = "#faf4c6"

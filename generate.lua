@@ -982,6 +982,77 @@ bright7=%s
     )
 end
 
+-- Generate Alacritty terminal config (TOML format)
+local function generate_alacritty_config()
+    return string.format([[# Terminomancy - Alacritty terminal theme
+# Generated from palette.lua
+#
+# Import in your alacritty.toml:
+#   [general]
+#   import = ["~/.config/terminomancy/alacritty/terminomancy.toml"]
+
+[colors.primary]
+foreground = "%s"
+background = "%s"
+
+[colors.cursor]
+text = "%s"
+cursor = "%s"
+
+[colors.selection]
+text = "%s"
+background = "%s"
+
+[colors.normal]
+black   = "%s"
+red     = "%s"
+green   = "%s"
+yellow  = "%s"
+blue    = "%s"
+magenta = "%s"
+cyan    = "%s"
+white   = "%s"
+
+[colors.bright]
+black   = "%s"
+red     = "%s"
+green   = "%s"
+yellow  = "%s"
+blue    = "%s"
+magenta = "%s"
+cyan    = "%s"
+white   = "%s"
+]],
+        -- Primary
+        palette.fg,
+        palette.bg,
+        -- Cursor
+        palette.bg,
+        palette.accent,
+        -- Selection
+        palette.fg,
+        palette.selection,
+        -- Normal 0-7
+        palette.bg,         -- black
+        palette.diff_del,   -- red
+        palette.string,     -- green
+        palette.accent,     -- yellow
+        palette.keyword,    -- blue
+        palette.todo,       -- magenta
+        palette.preproc,    -- cyan
+        palette.fg,         -- white
+        -- Bright 8-15
+        palette.comment,    -- bright black
+        palette.error,      -- bright red
+        palette.diff_add,   -- bright green
+        palette.number,     -- bright yellow
+        palette.info,       -- bright blue
+        palette.identifier, -- bright magenta
+        palette.special,    -- bright cyan
+        palette.func        -- bright white
+    )
+end
+
 -- Generate Sway window colors
 local function generate_sway_colors()
     return string.format([[# Terminomancy - Sway window colors
