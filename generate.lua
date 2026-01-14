@@ -1140,19 +1140,15 @@ end
 local function generate_fuzzel_config()
     return string.format([[# Terminomancy - Fuzzel launcher theme
 # Generated from palette.lua
-#
-# Copy to ~/.config/fuzzel/fuzzel.ini or include via:
-#   include ~/.config/terminomancy/fuzzel/fuzzel.ini
 
 [main]
-# Font (uncomment and adjust as needed)
-# font=monospace:size=14
-# width=50
-# lines=12
-# horizontal-pad=20
-# vertical-pad=15
-# border-width=2
-# border-radius=0
+font=JetBrainsMono Nerd Font:size=14
+width=50
+lines=12
+horizontal-pad=20
+vertical-pad=15
+border-width=2
+border-radius=0
 
 [colors]
 background=%sff
