@@ -1,0 +1,24 @@
+# Terminomancy - Mako notification daemon theme
+# Generated from palette.lua
+
+font=JetBrainsMono Nerd Font 11
+background-color=#222222
+text-color=#c2c2b0
+border-color=#e6952a
+border-size=2
+border-radius=0
+padding=10
+margin=10
+width=350
+default-timeout=5000
+max-visible=3
+
+[urgency=low]
+border-color=#8a8a78
+
+[urgency=normal]
+border-color=#e6952a
+
+[urgency=critical]
+border-color=#ff6a6a
+default-timeout=0

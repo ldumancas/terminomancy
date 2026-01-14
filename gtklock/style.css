@@ -1,0 +1,61 @@
+/* Terminomancy - gtklock theme
+ * Generated from palette.lua
+ */
+
+window {
+    background-color: #222222;
+}
+
+#clock-label {
+    font-size: 64px;
+    font-family: "JetBrainsMono Nerd Font";
+    color: #c2c2b0;
+    margin-bottom: 20px;
+}
+
+#date-label {
+    font-size: 24px;
+    font-family: "JetBrainsMono Nerd Font";
+    color: #8a8a78;
+    margin-bottom: 40px;
+}
+
+#input-field {
+    font-size: 16px;
+    font-family: "JetBrainsMono Nerd Font";
+    color: #c2c2b0;
+    background-color: #2d2d2d;
+    border: 2px solid #e6952a;
+    border-radius: 0px;
+    padding: 10px 20px;
+    min-width: 300px;
+}
+
+#input-field:focus {
+    border-color: #e6952a;
+    box-shadow: none;
+}
+
+#unlock-button {
+    font-size: 14px;
+    font-family: "JetBrainsMono Nerd Font";
+    color: #222222;
+    background-color: #e6952a;
+    border: none;
+    border-radius: 0px;
+    padding: 10px 20px;
+    margin-top: 10px;
+}
+
+#unlock-button:hover {
+    background-color: #c4820a;
+}
+
+#error-label {
+    color: #ff6a6a;
+    font-family: "JetBrainsMono Nerd Font";
+}
+
+#body {
+    margin: 0px;
+}

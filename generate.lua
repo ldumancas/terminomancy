@@ -1169,6 +1169,130 @@ border=%sff
     )
 end
 
+-- Generate Mako notification daemon config
+local function generate_mako_config()
+    return string.format([[# Terminomancy - Mako notification daemon theme
+# Generated from palette.lua
+
+font=JetBrainsMono Nerd Font 11
+background-color=%s
+text-color=%s
+border-color=%s
+border-size=2
+border-radius=0
+padding=10
+margin=10
+width=350
+default-timeout=5000
+max-visible=3
+
+[urgency=low]
+border-color=%s
+
+[urgency=normal]
+border-color=%s
+
+[urgency=critical]
+border-color=%s
+default-timeout=0
+]],
+        palette.bg,        -- background
+        palette.fg,        -- text
+        palette.accent,    -- border (default)
+        palette.comment,   -- low urgency border
+        palette.accent,    -- normal urgency border
+        palette.error      -- critical urgency border
+    )
+end
+
+-- Generate gtklock config
+local function generate_gtklock_config()
+    return [[# Terminomancy - gtklock config
+# Generated from palette.lua
+
+[main]
+style=/home/dumanl/.config/gtklock/style.css
+]]
+end
+
+-- Generate gtklock style
+local function generate_gtklock_style()
+    return string.format([[/* Terminomancy - gtklock theme
+ * Generated from palette.lua
+ */
+
+window {
+    background-color: %s;
+}
+
+#clock-label {
+    font-size: 64px;
+    font-family: "JetBrainsMono Nerd Font";
+    color: %s;
+    margin-bottom: 20px;
+}
+
+#date-label {
+    font-size: 24px;
+    font-family: "JetBrainsMono Nerd Font";
+    color: %s;
+    margin-bottom: 40px;
+}
+
+#input-field {
+    font-size: 16px;
+    font-family: "JetBrainsMono Nerd Font";
+    color: %s;
+    background-color: %s;
+    border: 2px solid %s;
+    border-radius: 0px;
+    padding: 10px 20px;
+    min-width: 300px;
+}
+
+#input-field:focus {
+    border-color: %s;
+    box-shadow: none;
+}
+
+#unlock-button {
+    font-size: 14px;
+    font-family: "JetBrainsMono Nerd Font";
+    color: %s;
+    background-color: %s;
+    border: none;
+    border-radius: 0px;
+    padding: 10px 20px;
+    margin-top: 10px;
+}
+
+#unlock-button:hover {
+    background-color: %s;
+}
+
+#error-label {
+    color: %s;
+    font-family: "JetBrainsMono Nerd Font";
+}
+
+#body {
+    margin: 0px;
+}
+]],
+        palette.bg,          -- window background
+        palette.fg,          -- clock color
+        palette.comment,     -- date color
+        palette.fg,          -- input text
+        palette.bg_light,    -- input background
+        palette.accent,      -- input border
+        palette.accent,      -- input focus border
+        palette.bg,          -- button text
+        palette.accent,      -- button background
+        palette.accent_dark, -- button hover
+        palette.error        -- error label
+    )
+end
+
 -- Main execution
 print("Generating Terminomancy configs from palette.lua...")
 
@@ -1283,6 +1407,34 @@ if f then
     f:write(waybar_style)
     f:close()
     print("✓ Generated waybar/style.css")
+end
+
+-- Write Mako config
+os.execute("mkdir -p mako")
+local mako_config = generate_mako_config()
+f = io.open("mako/config", "w")
+if f then
+    f:write(mako_config)
+    f:close()
+    print("✓ Generated mako/config")
+end
+
+-- Write gtklock config and style
+os.execute("mkdir -p gtklock")
+local gtklock_config = generate_gtklock_config()
+f = io.open("gtklock/config.ini", "w")
+if f then
+    f:write(gtklock_config)
+    f:close()
+    print("✓ Generated gtklock/config.ini")
+end
+
+local gtklock_style = generate_gtklock_style()
+f = io.open("gtklock/style.css", "w")
+if f then
+    f:write(gtklock_style)
+    f:close()
+    print("✓ Generated gtklock/style.css")
 end
 
 print("\n✨ All configs generated successfully!")
