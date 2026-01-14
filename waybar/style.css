@@ -1,0 +1,44 @@
+/* Terminomancy - Waybar theme
+ * Generated from palette.lua
+ *
+ * Copy to ~/.config/waybar/style.css or include via symlink
+ */
+
+* {
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 12px;
+}
+
+window#waybar {
+    background-color: #222222;
+    color: #c2c2b0;
+}
+
+#workspaces button,
+#clock,
+#pulseaudio,
+#tray {
+    padding: 0 10px;
+}
+
+#clock {
+    color: #e6952a;
+    font-weight: bold;
+}
+
+#workspaces button {
+    color: #8a8a78;
+}
+
+#workspaces button.focused {
+    color: #e6952a;
+    border-bottom: 2px solid #e6952a;
+}
+
+#workspaces button.urgent {
+    color: #ff6a6a;
+}
+
+#pulseaudio:hover {
+    background-color: #2d2d2d;
+}

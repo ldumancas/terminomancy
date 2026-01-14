@@ -1078,6 +1078,101 @@ client.urgent           %s   %s     %s   %s     %s
     )
 end
 
+-- Generate Waybar status bar style
+local function generate_waybar_style()
+    return string.format([[/* Terminomancy - Waybar theme
+ * Generated from palette.lua
+ *
+ * Copy to ~/.config/waybar/style.css or include via symlink
+ */
+
+* {
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 12px;
+}
+
+window#waybar {
+    background-color: %s;
+    color: %s;
+}
+
+#workspaces button,
+#clock,
+#pulseaudio,
+#tray {
+    padding: 0 10px;
+}
+
+#clock {
+    color: %s;
+    font-weight: bold;
+}
+
+#workspaces button {
+    color: %s;
+}
+
+#workspaces button.focused {
+    color: %s;
+    border-bottom: 2px solid %s;
+}
+
+#workspaces button.urgent {
+    color: %s;
+}
+
+#pulseaudio:hover {
+    background-color: %s;
+}
+]],
+        palette.bg,        -- window background
+        palette.fg,        -- window text
+        palette.accent,    -- clock color
+        palette.comment,   -- workspace button color
+        palette.accent,    -- focused workspace color
+        palette.accent,    -- focused workspace border
+        palette.error,     -- urgent workspace color
+        palette.bg_light   -- pulseaudio hover background
+    )
+end
+
+-- Generate Fuzzel launcher config
+local function generate_fuzzel_config()
+    return string.format([[# Terminomancy - Fuzzel launcher theme
+# Generated from palette.lua
+#
+# Copy to ~/.config/fuzzel/fuzzel.ini or include via:
+#   include ~/.config/terminomancy/fuzzel/fuzzel.ini
+
+[main]
+# Font (uncomment and adjust as needed)
+# font=monospace:size=14
+# width=50
+# lines=12
+# horizontal-pad=20
+# vertical-pad=15
+# border-width=2
+# border-radius=0
+
+[colors]
+background=%sff
+text=%sff
+match=%sff
+selection=%sff
+selection-text=%sff
+selection-match=%sff
+border=%sff
+]],
+        hex_strip(palette.bg),
+        hex_strip(palette.fg),
+        hex_strip(palette.accent),
+        hex_strip(palette.bg_light),
+        hex_strip(palette.accent),
+        hex_strip(palette.accent),
+        hex_strip(palette.accent)
+    )
+end
+
 -- Main execution
 print("Generating Terminomancy configs from palette.lua...")
 
@@ -1162,6 +1257,36 @@ if f then
     f:write(sway_colors)
     f:close()
     print("✓ Generated sway/colors")
+end
+
+-- Write Fuzzel config
+os.execute("mkdir -p fuzzel")
+local fuzzel_config = generate_fuzzel_config()
+f = io.open("fuzzel/fuzzel.ini", "w")
+if f then
+    f:write(fuzzel_config)
+    f:close()
+    print("✓ Generated fuzzel/fuzzel.ini")
+end
+
+-- Write Alacritty terminal config
+os.execute("mkdir -p alacritty")
+local alacritty_config = generate_alacritty_config()
+f = io.open("alacritty/terminomancy.toml", "w")
+if f then
+    f:write(alacritty_config)
+    f:close()
+    print("✓ Generated alacritty/terminomancy.toml")
+end
+
+-- Write Waybar style
+os.execute("mkdir -p waybar")
+local waybar_style = generate_waybar_style()
+f = io.open("waybar/style.css", "w")
+if f then
+    f:write(waybar_style)
+    f:close()
+    print("✓ Generated waybar/style.css")
 end
 
 print("\n✨ All configs generated successfully!")
