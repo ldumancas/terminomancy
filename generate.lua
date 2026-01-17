@@ -1209,9 +1209,10 @@ end
 local function generate_gtklock_config()
     return [[# Terminomancy - gtklock config
 # Generated from palette.lua
+# Note: style.css should be in the same directory as this config
 
 [main]
-style=/home/dumanl/.config/gtklock/style.css
+style=style.css
 ]]
 end
 
