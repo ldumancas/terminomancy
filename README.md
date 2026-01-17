@@ -4,6 +4,12 @@ A dark color scheme for terminal-based development environments.
 
 A reinterpretation of [sourcerer](https://github.com/xero/sourcerer) by xero harrison, based on sorcerer by Jeet Sukumaran, based on mustang by Henrique C. Alves.
 
+## Preview
+
+![Neovim and terminal with starship prompt](screenshots/neovim-terminal.png)
+
+![fzf with diff preview](screenshots/fzf-diff.png)
+
 ## Supported Tools
 
 - **tmux**
