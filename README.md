@@ -31,83 +31,77 @@ A reinterpretation of [sourcerer](https://github.com/xero/sourcerer) by xero har
 
 ### tmux
 
-Source the theme to your `~/.tmux.conf`:
+Source the theme in your `~/.tmux.conf`:
 
-```bash
+```tmux
 source-file /path/to/terminomancy/tmux/terminomancy.conf
 ```
 
 ### Neovim
 
-Add the colorscheme to your runtime path:
+Symlink or copy the colorscheme to your nvim colors directory:
 
 ```bash
-~/.config/nvim/colors/terminomancy.lua
+mkdir -p ~/.config/nvim/colors
+ln -s /path/to/terminomancy/nvim/colors/terminomancy.lua ~/.config/nvim/colors/
 ```
 
-Then in your config add:
+Then in your config:
 
 ```lua
 vim.cmd("colorscheme terminomancy")
 ```
-### Terminal emulators (untested)
 
-#### Blink.sh 
+### Terminal emulators
 
-- [Installation](https://github.com/blinksh/themes/tree/master?tab=readme-ov-file#blink-shell-themes)
+**Alacritty** — Import the theme in your `~/.config/alacritty/alacritty.toml`:
 
-#### Windows Terminal
+```toml
+[general]
+import = ["/path/to/terminomancy/alacritty/terminomancy.toml"]
+```
 
-- [Installation](https://learn.microsoft.com/en-us/windows/terminal/customize-settings/themes)
+**Foot** — Symlink or copy to `~/.config/foot/foot.ini`
 
-#### macOS Terminal.app
+**iTerm2** — Import `terminals/terminomancy-iterm.json` via Preferences → Profiles → Colors → Import
 
-- [Installation](https://support.apple.com/guide/terminal/profiles-change-terminal-windows-trml107/mac)
+**Blink.sh** — [Installation guide](https://github.com/blinksh/themes/tree/master?tab=readme-ov-file#blink-shell-themes)
+
+**Windows Terminal** — [Installation guide](https://learn.microsoft.com/en-us/windows/terminal/customize-settings/themes)
+
+### LS_COLORS / EZA_COLORS
+
+Source the script in your shell rc file (`.bashrc` or `.zshrc`):
+
+```bash
+source /path/to/terminomancy/shell/ls-colors-terminomancy.sh
+```
+
+### Bat
+
+Copy the theme and rebuild the cache:
+
+```bash
+mkdir -p ~/.config/bat/themes
+cp /path/to/terminomancy/bat/Terminomancy.tmTheme ~/.config/bat/themes/
+bat cache --build
+```
+
+Then set the theme in your bat config or via `--theme=Terminomancy`.
+
+### Other tools
+
+For Starship, Sway, Waybar, Fuzzel, Mako, and gtklock — symlink the generated config to the appropriate location in `~/.config/`. For example:
+
+```bash
+ln -s /path/to/terminomancy/starship/starship.toml ~/.config/starship.toml
+```
 
 ## Color Palette
 
 All colors are defined in `palette.lua` as the single source of truth. Run `lua generate.lua` to regenerate all config files.
 
-| Color | Hex | Usage |
-|-------|-----|-------|
-| bg | `#222222` | Background |
-| bg_dark | `#1a1a1a` | Darker background |
-| bg_light | `#2d2d2d` | Lighter background |
-| fg | `#c2c2b0` | Foreground text |
-| fg_dim | `#a0a08e` | Dimmed text |
-| | | |
-| comment | `#8a8a78` | Comments |
-| string | `#779b70` | Strings |
-| func | `#faf4c6` | Functions |
-| keyword | `#8888cc` | Keywords |
-| type | `#7e8aa2` | Types |
-| constant | `#e6952a` | Constants |
-| number | `#cc8800` | Numbers |
-| identifier | `#70b8b8` | Identifiers |
-| special | `#719611` | Special characters |
-| preproc | `#528b8b` | Preprocessor |
-| | | |
-| selection | `#3a3a3a` | Selected text |
-| linenr | `#929292` | Line numbers |
-| match | `#fff000` | Matching brackets |
-| search | `#d6e770` | Search highlights |
-| | | |
-| error | `#ff6a6a` | Errors |
-| warning | `#e6952a` | Warnings |
-| info | `#4f94cd` | Info |
-| hint | `#2e8b57` | Hints |
-| | | |
-| diff_add | `#3cb371` | Added lines |
-| diff_del | `#aa4450` | Deleted lines |
-| diff_change | `#4f94cd` | Changed lines |
-| diff_add_bg | `#2a3a2a` | Added background |
-| diff_del_bg | `#3a2828` | Deleted background |
-| diff_change_bg | `#28303a` | Changed background |
-| diff_text_bg | `#3a4a5a` | Diff text background |
-| | | |
-| accent | `#e6952a` | Accent color |
-| accent_dark | `#c4820a` | Dark accent |
-| todo | `#8f6f8f` | TODO highlights |
+See [README_PALETTE.md](README_PALETTE.md) for the full color table.
 
 ## Semantic Usage Guide
 
@@ -165,6 +159,12 @@ Beyond code syntax highlighting, colors have consistent semantic meanings across
 | Active pane border (tmux) | `accent` | Focus indicator |
 | Notification border (mako) | `accent` | Normal attention |
 | Critical notification (mako) | `error` | Urgent attention |
+| Directory (starship) | `keyword` | Structural navigation |
+| Git branch (starship) | `comment` | Metadata |
+| Git status (starship) | `warning` | Needs attention |
+| AWS/K8s context (starship) | `identifier` | Infrastructure context |
+| Vi cmd mode (starship) | `accent` | Mode indicator |
+| Error prompt (starship) | `diff_del` | Soft error |
 
 ### Decision Tree
 
