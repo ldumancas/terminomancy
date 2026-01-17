@@ -1293,6 +1293,88 @@ window {
     )
 end
 
+-- Generate Starship prompt config
+-- Semantic mappings:
+--   directory     → keyword    (structural navigation, matches LS_COLORS)
+--   git_branch    → comment    (contextual metadata, matches waybar workspace)
+--   git_status    → warning    (needs attention, matches LS_COLORS git modified)
+--   aws           → identifier (cloud resources, per semantic guide)
+--   kubernetes    → identifier (containers/infra, per semantic guide)
+--   not_git       → fg_dim     (unimportant, matches LS_COLORS logs)
+--   success       → fg         (neutral ready state)
+--   error         → diff_del   (soft error, not critical)
+--   vicmd         → accent     (mode indicator, per semantic guide)
+local function generate_starship_config()
+    return string.format([[# Terminomancy - Starship prompt theme
+# Generated from palette.lua
+#
+# Copy to ~/.config/starship.toml or symlink
+
+format = """
+$directory\
+$git_branch\
+$git_status\
+${custom.not_git}\
+$aws\
+$kubernetes\
+$line_break\
+$character"""
+
+[directory]
+truncate_to_repo = false
+truncation_length = 0
+fish_style_pwd_dir_length = 0
+style = "%s"
+
+[git_branch]
+format = "[$branch]($style) "
+style = "%s"
+
+[git_status]
+format = "[$all_status$ahead_behind]($style) "
+style = "%s"
+conflicted = "!"
+ahead = "⇡"
+behind = "⇣"
+diverged = "⇕"
+untracked = "?"
+stashed = "*"
+modified = "✗"
+staged = "+"
+deleted = "x"
+
+[aws]
+format = "[$profile]($style) "
+style = "%s"
+
+[kubernetes]
+disabled = false
+format = "[$context]($style) "
+style = "%s"
+
+[custom.not_git]
+command = "echo 'not_git'"
+when = "! git rev-parse --git-dir > /dev/null 2>&1"
+format = "[$output]($style) "
+style = "%s"
+
+[character]
+success_symbol = "[\\$](%s)"
+error_symbol = "[\\$](%s)"
+vicmd_symbol = "[❮](%s)"
+]],
+        palette.keyword,    -- directory
+        palette.comment,    -- git_branch
+        palette.warning,    -- git_status
+        palette.identifier, -- aws
+        palette.identifier, -- kubernetes
+        palette.fg_dim,     -- not_git
+        palette.fg,         -- success_symbol
+        palette.diff_del,   -- error_symbol
+        palette.accent      -- vicmd_symbol
+    )
+end
+
 -- Main execution
 print("Generating Terminomancy configs from palette.lua...")
 
@@ -1435,6 +1517,16 @@ if f then
     f:write(gtklock_style)
     f:close()
     print("✓ Generated gtklock/style.css")
+end
+
+-- Write Starship config
+os.execute("mkdir -p starship")
+local starship_config = generate_starship_config()
+f = io.open("starship/starship.toml", "w")
+if f then
+    f:write(starship_config)
+    f:close()
+    print("✓ Generated starship/starship.toml")
 end
 
 print("\n✨ All configs generated successfully!")

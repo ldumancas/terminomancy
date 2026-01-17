@@ -1,0 +1,57 @@
+# Terminomancy - Starship prompt theme
+# Generated from palette.lua
+#
+# Copy to ~/.config/starship.toml or symlink
+
+format = """
+$directory\
+$git_branch\
+$git_status\
+${custom.not_git}\
+$aws\
+$kubernetes\
+$line_break\
+$character"""
+
+[directory]
+truncate_to_repo = false
+truncation_length = 0
+fish_style_pwd_dir_length = 0
+style = "#8888cc"
+
+[git_branch]
+format = "[$branch]($style) "
+style = "#8a8a78"
+
+[git_status]
+format = "[$all_status$ahead_behind]($style) "
+style = "#e6952a"
+conflicted = "!"
+ahead = "⇡"
+behind = "⇣"
+diverged = "⇕"
+untracked = "?"
+stashed = "*"
+modified = "✗"
+staged = "+"
+deleted = "x"
+
+[aws]
+format = "[$profile]($style) "
+style = "#70b8b8"
+
+[kubernetes]
+disabled = false
+format = "[$context]($style) "
+style = "#70b8b8"
+
+[custom.not_git]
+command = "echo 'not_git'"
+when = "! git rev-parse --git-dir > /dev/null 2>&1"
+format = "[$output]($style) "
+style = "#a0a08e"
+
+[character]
+success_symbol = "[\\$](#c2c2b0)"
+error_symbol = "[\\$](#aa4450)"
+vicmd_symbol = "[❮](#e6952a)"
