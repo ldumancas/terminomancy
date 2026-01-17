@@ -13,11 +13,19 @@ A reinterpretation of [sourcerer](https://github.com/xero/sourcerer) by xero har
 - **Shell**
   - LS_COLORS / EZA_COLORS
   - Bat syntax highlighter
+  - Starship prompt
 - **Terminal emulators:**
+  - Alacritty
+  - Foot
   - iTerm2
   - Blink.sh
   - Windows Terminal
-  - macOS Terminal.app
+- **Wayland:**
+  - Sway
+  - Waybar
+  - Fuzzel
+  - Mako
+  - gtklock
 
 ## Installation
 
@@ -100,6 +108,77 @@ All colors are defined in `palette.lua` as the single source of truth. Run `lua 
 | accent | `#e6952a` | Accent color |
 | accent_dark | `#c4820a` | Dark accent |
 | todo | `#8f6f8f` | TODO highlights |
+
+## Semantic Usage Guide
+
+Beyond code syntax highlighting, colors have consistent semantic meanings across UI elements. When adding new tools to terminomancy, follow these patterns:
+
+### Attention & Focus
+
+| Color | When to Use |
+|-------|-------------|
+| `accent` | Focused/active states, cursor, important context (clock, active profile), mode indicators |
+| `accent_dark` | Hover states, secondary emphasis |
+| `warning` | Needs attention but not critical (same color as accent — intentional) |
+
+### Structure & Navigation
+
+| Color | When to Use |
+|-------|-------------|
+| `keyword` | Structural/navigation elements — directories, tags, headers |
+| `identifier` | Infrastructure context — containers, symlinks, URLs, cloud resources |
+| `preproc` | Config/infra (alternate to identifier) — use for variety when identifier is already used nearby |
+
+### Information Hierarchy
+
+| Color | When to Use |
+|-------|-------------|
+| `fg` | Primary readable text, default prompt |
+| `fg_dim` | Secondary/unimportant info — inactive states, log files, licenses, timestamps |
+| `comment` | Metadata — git branches, workspace labels, contextual info that's present but not primary |
+| `linenr` | Neutral chrome — line numbers, borders, separators |
+
+### Status & Feedback
+
+| Color | When to Use |
+|-------|-------------|
+| `error` | Critical errors, urgent notifications — demands immediate attention |
+| `diff_del` | Soft errors, deletions, problems — something's wrong but not critical |
+| `diff_add` | Success, additions, positive state |
+| `diff_change` | Modified/changed state, informational |
+| `info` | Informational messages, links |
+| `hint` | Suggestions, hints, subtle guidance |
+
+### Examples from Existing Configs
+
+| Element | Color | Rationale |
+|---------|-------|-----------|
+| Directories (LS_COLORS) | `keyword` | Structural navigation |
+| Symlinks (LS_COLORS) | `identifier` | Infrastructure/linking |
+| Executables (LS_COLORS) | `constant` | Special capability |
+| Git modified (LS_COLORS) | `warning` | Needs attention |
+| Focused window (sway) | `accent` | Active state |
+| Unfocused window (sway) | `comment` | Present but not primary |
+| Urgent window (sway) | `error` | Demands attention |
+| Clock (waybar) | `accent` | Important context |
+| Workspace button (waybar) | `comment` | Metadata |
+| Active pane border (tmux) | `accent` | Focus indicator |
+| Notification border (mako) | `accent` | Normal attention |
+| Critical notification (mako) | `error` | Urgent attention |
+
+### Decision Tree
+
+When deciding which color to use for a new element:
+
+1. **Is it focused/active/important?** → `accent`
+2. **Is it an error or critical problem?** → `error`
+3. **Is it a soft error or deletion?** → `diff_del`
+4. **Is it success or addition?** → `diff_add`
+5. **Is it structural/navigational?** → `keyword`
+6. **Is it infrastructure/config?** → `identifier` or `preproc`
+7. **Is it metadata/secondary info?** → `comment`
+8. **Is it unimportant/inactive?** → `fg_dim`
+9. **Is it normal readable text?** → `fg`
 
 ## License
 
